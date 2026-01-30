@@ -87,7 +87,7 @@
 
         .header-content {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             width: 100%;
             position: relative;
@@ -98,7 +98,8 @@
             display: flex;
             align-items: center;
             gap: 1.5rem;
-            flex: 1;
+            width: 100%;
+            justify-content: center;
         }
 
         .logo {
@@ -120,6 +121,7 @@
             backdrop-filter: blur(10px);
             border-radius: var(--radius);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 400px;
         }
 
         .data-usage-text {
@@ -144,6 +146,11 @@
             .data-usage-text {
                 font-size: 0.8rem;
             }
+            
+            .logo-container {
+                justify-content: center;
+                gap: 2rem;
+            }
         }
 
         .header-text {
@@ -154,66 +161,6 @@
             margin-top: 0.5rem;
             position: relative;
             z-index: 2;
-        }
-
-        /* Share button no header - COM TEXTO "Compartilhe" */
-        .share-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .share-text {
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-
-        .share-btn {
-            background: transparent;
-            border: none;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            position: relative;
-            outline: none;
-            box-shadow: none;
-        }
-
-        .share-btn:hover {
-            color: var(--accent-light);
-            transform: scale(1.1);
-        }
-
-        .share-btn::after {
-            content: 'Compartilhar';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-            margin-top: 5px;
-        }
-
-        .share-btn:hover::after {
-            opacity: 1;
         }
 
         /* Main content visível */
@@ -1115,18 +1062,8 @@
             
             .data-usage-info {
                 width: 100%;
-                order: 3;
+                order: 2;
                 margin-top: 0.5rem;
-            }
-            
-            .share-container {
-                position: absolute;
-                top: 1rem;
-                right: 1rem;
-            }
-            
-            .share-text {
-                display: none;
             }
             
             .button-group {
@@ -1179,12 +1116,6 @@
                             <strong>As informações solicitadas são usadas para atendimento e orientação técnica.</strong>
                         </p>
                     </div>
-                </div>
-                <div class="share-container">
-                    <div class="share-text">Compartilhe</div>
-                    <button type="button" class="share-btn" onclick="shareApp()" title="Compartilhar">
-                        <i class="fa-solid fa-share-nodes"></i>
-                    </button>
                 </div>
             </div>
             <p class="header-text">Solicite seu orçamento de forma rápida e fácil</p>
@@ -1822,27 +1753,8 @@
             autoSaveForm();
         }
 
-        // Share function
-        function shareApp() {
-            const url = window.location.href;
-            const text = "Solicite seu orçamento na Do Óleo Sorocaba! Clique aqui: ";
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: "Do Óleo Sorocaba",
-                    text: text,
-                    url: url
-                }).catch(err => console.log('Erro ao compartilhar:', err));
-            } else {
-                const dummy = document.createElement('input');
-                document.body.appendChild(dummy);
-                dummy.value = url;
-                dummy.select();
-                document.execCommand('copy');
-                document.body.removeChild(dummy);
-                showToast('Link copiado para a área de transferência!');
-            }
-        }
+        // Share function - REMOVIDA
+        // Função shareApp() foi completamente removida
 
         // Toast notification
         function showToast(message) {
