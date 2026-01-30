@@ -121,7 +121,21 @@
             z-index: 2;
         }
 
-        /* Share button no header - SEM CONTORNO */
+        /* Share button no header - COM TEXTO "Compartilhe" */
+        .share-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .share-text {
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
         .share-btn {
             background: transparent;
             border: none;
@@ -289,6 +303,14 @@
             gap: 0.5rem;
         }
 
+        .trust-badge strong {
+            background: #000;
+            color: #FFD700;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-weight: 700;
+        }
+
         .checkmark {
             color: var(--accent);
             font-weight: 600;
@@ -384,6 +406,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
+            text-transform: uppercase;
         }
 
         input:focus,
@@ -1192,11 +1215,11 @@
             color: var(--accent-light);
         }
 
-        /* Frase de valores harmoniosa */
+        /* Frase de valores harmoniosa - MENOR */
         .values-phrase {
             margin: 1.5rem 0;
             text-align: center;
-            padding: 1.2rem;
+            padding: 1rem;
             background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.08) 100%);
             border-radius: var(--radius);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -1211,23 +1234,23 @@
         }
 
         .values-phrase p {
-            font-size: 1.1rem;
+            font-size: 0.95rem; /* Menor para caber em uma linha */
             font-weight: 700;
             color: #ef4444;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px; /* Menor espaçamento */
             font-family: 'Poppins', sans-serif;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1rem;
+            gap: 0.5rem; /* Menor gap */
         }
 
         .values-phrase p::before,
         .values-phrase p::after {
             content: "✦";
             color: rgba(239, 68, 68, 0.7);
-            font-size: 1rem;
+            font-size: 0.85rem;
             animation: subtlePulse 2s infinite;
         }
 
@@ -1261,11 +1284,12 @@
                 gap: 0.5rem;
             }
             
-            .share-btn {
-                position: relative;
-                right: 0;
-                top: 0;
-                margin-left: auto;
+            .share-container {
+                align-items: flex-end;
+            }
+            
+            .share-text {
+                font-size: 0.7rem;
             }
             
             .button-group {
@@ -1286,14 +1310,15 @@
             }
             
             .values-phrase p {
-                font-size: 1rem;
-                gap: 0.5rem;
-                flex-direction: column;
+                font-size: 0.85rem; /* Ainda menor no mobile */
+                gap: 0.3rem;
+                flex-direction: row; /* Mantém na horizontal */
             }
             
             .values-phrase p::before,
             .values-phrase p::after {
-                display: none;
+                display: inline-block; /* Mantém visível no mobile */
+                font-size: 0.75rem;
             }
             
             .whatsapp-float {
@@ -1317,9 +1342,12 @@
         <div class="container">
             <div class="header-content">
                 <img src="https://raw.githubusercontent.com/DavissonCoelho/appsdooleosorocaba/main/dooleologo.png" alt="Do Óleo Sorocaba" class="logo">
-                <button type="button" class="share-btn" onclick="shareApp()" title="Compartilhar">
-                    <i class="fa-solid fa-share-nodes"></i>
-                </button>
+                <div class="share-container">
+                    <div class="share-text">Compartilhe</div>
+                    <button type="button" class="share-btn" onclick="shareApp()" title="Compartilhar">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </button>
+                </div>
             </div>
             <p class="header-text">Solicite seu orçamento de forma rápida e fácil</p>
         </div>
@@ -1369,12 +1397,12 @@
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                                     <div class="form-group">
                                         <label for="brand">Marca <span class="required" id="brand-required">*</span></label>
-                                        <input type="text" id="brand" placeholder="Ex: Toyota" title="Exemplos: Toyota, Honda, Volkswagen, Fiat, Chevrolet">
+                                        <input type="text" id="brand" placeholder="Ex: TOYOTA" title="Exemplos: TOYOTA, HONDA, VOLKSWAGEN, FIAT, CHEVROLET" maxlength="20">
                                         <div class="error-message" id="error-brand"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="model">Modelo <span class="required" id="model-required">*</span></label>
-                                        <input type="text" id="model" placeholder="Ex: Corolla" title="Exemplos: Corolla, Civic, Gol, Palio, Onix">
+                                        <input type="text" id="model" placeholder="Ex: COROLLA" title="Exemplos: COROLLA, CIVIC, GOL, PALIO, ONIX" maxlength="30">
                                         <div class="error-message" id="error-model"></div>
                                     </div>
                                 </div>
@@ -1382,7 +1410,7 @@
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                                     <div class="form-group">
                                         <label for="displacement">Motorização <span class="required" id="displacement-required">*</span></label>
-                                        <input type="text" id="displacement" placeholder="Ex: 2.0 16V" title="Exemplos: 1.0, 1.4, 1.6, 1.8, 2.0, 3.0 V6">
+                                        <input type="text" id="displacement" placeholder="Ex: 2.0 16V" title="Formato: 99.9 XXX (Ex: 1.0, 2.0 16V, 3.0 V6)" maxlength="8">
                                         <div class="error-message" id="error-displacement"></div>
                                     </div>
                                     <div class="form-group">
@@ -1390,11 +1418,11 @@
                                         <div style="display: flex; gap: 0.5rem;">
                                             <div class="checkbox-option" style="flex: 1; padding: 0.75rem;" onclick="toggleTurbo('turbo-yes')">
                                                 <input type="checkbox" id="turbo-yes">
-                                                <label for="turbo-yes">Sim</label>
+                                                <label for="turbo-yes">SIM</label>
                                             </div>
                                             <div class="checkbox-option" style="flex: 1; padding: 0.75rem;" onclick="toggleTurbo('turbo-no')">
                                                 <input type="checkbox" id="turbo-no">
-                                                <label for="turbo-no">Não</label>
+                                                <label for="turbo-no">NÃO</label>
                                             </div>
                                         </div>
                                     </div>
@@ -1403,12 +1431,12 @@
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                                     <div class="form-group">
                                         <label for="yearManufacture">Ano Fabricação <span class="required" id="yearManufacture-required">*</span></label>
-                                        <input type="number" id="yearManufacture" placeholder="Ex: 2020" min="1900" max="2026">
+                                        <input type="number" id="yearManufacture" placeholder="Ex: 2020" min="1901" max="2099" maxlength="4" oninput="validateYearInput(this, 'yearManufacture')">
                                         <div class="error-message" id="error-yearManufacture"></div>
                                     </div>
                                     <div class="form-group">
                                         <label for="yearModel">Ano Modelo <span class="required" id="yearModel-required">*</span></label>
-                                        <input type="number" id="yearModel" placeholder="Ex: 2021" min="1900" max="2026">
+                                        <input type="number" id="yearModel" placeholder="Ex: 2021" min="1901" max="2099" maxlength="4" oninput="validateYearInput(this, 'yearModel')">
                                         <div class="error-message" id="error-yearModel"></div>
                                     </div>
                                 </div>
@@ -1599,7 +1627,7 @@
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
                                 <div class="form-group">
                                     <label for="clientName">Seu Nome <span class="optional">(Opcional)</span></label>
-                                    <input type="text" id="clientName" placeholder="Como prefere ser chamado">
+                                    <input type="text" id="clientName" placeholder="COMO PREFERE SER CHAMADO">
                                 </div>
                                 <div class="form-group">
                                     <label for="clientPhone">Telefone <span class="optional">(Opcional)</span></label>
@@ -1665,7 +1693,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="faq-answer">
-                            Aceitamos cartão (débito/crédito), PIX, transferência bancária e dinheiro.
+                            Aceitamos cartão (débito/crédito), PIX e dinheiro.
                         </div>
                     </div>
                     
@@ -1865,7 +1893,132 @@
             updateRequiredFields();
             loadSavedForm();
             updateProgressIndicator();
+            setupInputListeners();
         });
+
+        // Setup input listeners for uppercase conversion
+        function setupInputListeners() {
+            // Campos de texto para converter para maiúsculas
+            const textInputs = ['brand', 'model', 'displacement', 'clientName'];
+            
+            textInputs.forEach(field => {
+                const input = document.getElementById(field);
+                if (input) {
+                    input.addEventListener('input', function(e) {
+                        this.value = this.value.toUpperCase();
+                        formInputs[field] = this.value;
+                        
+                        // Validação específica para motorização
+                        if (field === 'displacement') {
+                            validateDisplacement(this);
+                        }
+                        
+                        // Validação para campos obrigatórios
+                        if (field === 'brand' || field === 'model' || field === 'displacement') {
+                            if (!formInputs.licensePlate && !this.value.trim()) {
+                                showError(field, `Este campo é obrigatório`);
+                            } else {
+                                clearError(field);
+                            }
+                        }
+                        
+                        autoSaveForm();
+                    });
+                    
+                    // Também converter no blur para garantir
+                    input.addEventListener('blur', function() {
+                        this.value = this.value.toUpperCase();
+                        formInputs[field] = this.value;
+                    });
+                }
+            });
+            
+            // Campo de telefone (não converter para maiúsculas)
+            const phoneInput = document.getElementById('clientPhone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    formInputs.clientPhone = this.value;
+                    autoSaveForm();
+                });
+            }
+        }
+
+        // Validação específica para motorização
+        function validateDisplacement(input) {
+            let value = input.value;
+            
+            // Remove caracteres não permitidos (mantém números, ponto, espaço e letras)
+            value = value.replace(/[^0-9.\sA-Z]/g, '');
+            
+            // Limita a 8 caracteres
+            if (value.length > 8) {
+                value = value.substring(0, 8);
+            }
+            
+            // Formatação automática para o formato 99.9 XXX
+            if (value.length > 0) {
+                // Garante que haja no máximo um ponto
+                const dotCount = (value.match(/\./g) || []).length;
+                if (dotCount > 1) {
+                    value = value.replace(/\.+$/, '');
+                }
+                
+                // Se houver um ponto, garante que há números após
+                if (value.includes('.') && value.indexOf('.') === value.length - 1) {
+                    // Permite que o usuário continue digitando
+                }
+            }
+            
+            input.value = value;
+            formInputs.displacement = value;
+            
+            // Valida o formato final
+            if (value.trim() && !/^\d{1,2}\.\d{1}(\s+[A-Z0-9]{1,3})?$/.test(value)) {
+                showError('displacement', 'Formato inválido. Use: 99.9 XXX (Ex: 2.0 16V)');
+                input.style.borderColor = 'var(--destructive)';
+            } else {
+                clearError('displacement');
+                input.style.borderColor = '';
+            }
+        }
+
+        // Validação de ano com limite de 4 dígitos
+        function validateYearInput(input, field) {
+            let value = input.value;
+            
+            // Remove caracteres não numéricos
+            value = value.replace(/\D/g, '');
+            
+            // Limita a 4 dígitos
+            if (value.length > 4) {
+                value = value.substring(0, 4);
+                showToast('Ano limitado a 4 dígitos');
+            }
+            
+            // Atualiza o valor no input
+            input.value = value;
+            formInputs[field] = value ? parseInt(value) : '';
+            
+            // Validação do intervalo
+            if (value.length === 4) {
+                const year = parseInt(value);
+                if (year < 1901 || year > 2099) {
+                    showError(field, 'Ano deve estar entre 1901 e 2099');
+                    input.style.borderColor = 'var(--destructive)';
+                } else {
+                    clearError(field);
+                    input.style.borderColor = '';
+                }
+            } else if (value.length > 0 && value.length < 4) {
+                showError(field, 'Ano deve ter 4 dígitos');
+                input.style.borderColor = 'var(--destructive)';
+            } else if (!value) {
+                clearError(field);
+                input.style.borderColor = '';
+            }
+            
+            autoSaveForm();
+        }
 
         // Share function
         function shareApp() {
@@ -1965,13 +2118,30 @@
                         showError('displacement', 'Motorização é obrigatória sem placa');
                         isValid = false;
                     }
-                    if (!formInputs.yearManufacture) {
-                        showError('yearManufacture', 'Ano de fabricação é obrigatório sem placa');
+                    if (!formInputs.yearManufacture || formInputs.yearManufacture.toString().length !== 4) {
+                        showError('yearManufacture', 'Ano de fabricação (4 dígitos) é obrigatório sem placa');
                         isValid = false;
                     }
-                    if (!formInputs.yearModel) {
-                        showError('yearModel', 'Ano do modelo é obrigatório sem placa');
+                    if (!formInputs.yearModel || formInputs.yearModel.toString().length !== 4) {
+                        showError('yearModel', 'Ano do modelo (4 dígitos) é obrigatório sem placa');
                         isValid = false;
+                    }
+                    
+                    // Validação específica dos anos
+                    if (formInputs.yearManufacture) {
+                        const yearMan = parseInt(formInputs.yearManufacture);
+                        if (yearMan < 1901 || yearMan > 2099) {
+                            showError('yearManufacture', 'Ano de fabricação deve estar entre 1901 e 2099');
+                            isValid = false;
+                        }
+                    }
+                    
+                    if (formInputs.yearModel) {
+                        const yearMod = parseInt(formInputs.yearModel);
+                        if (yearMod < 1901 || yearMod > 2099) {
+                            showError('yearModel', 'Ano do modelo deve estar entre 1901 e 2099');
+                            isValid = false;
+                        }
                     }
                 } else {
                     if (!validateLicensePlate(formInputs.licensePlate)) {
@@ -2026,7 +2196,7 @@
                 noCheckbox.checked = false;
                 option.classList.add('checked');
                 noOption.classList.remove('checked');
-                formInputs.turbo = 'Sim';
+                formInputs.turbo = 'SIM';
             } else if (checkboxId === 'turbo-no') {
                 const yesCheckbox = document.getElementById('turbo-yes');
                 const yesOption = yesCheckbox.closest('.checkbox-option');
@@ -2035,7 +2205,7 @@
                 yesCheckbox.checked = false;
                 option.classList.add('checked');
                 yesOption.classList.remove('checked');
-                formInputs.turbo = 'Não';
+                formInputs.turbo = 'NÃO';
             }
             
             option.style.transform = 'scale(0.95)';
@@ -2199,31 +2369,6 @@
             
             validateLicensePlate(displayValue);
             updateRequiredFields();
-        });
-
-        // Add event listeners for validation feedback
-        const fields = ['brand', 'model', 'displacement', 'yearManufacture', 'yearModel', 'clientName', 'clientPhone'];
-        fields.forEach(field => {
-            const input = document.getElementById(field);
-            if (input) {
-                input.addEventListener('blur', () => {
-                    if (field !== 'clientName' && field !== 'clientPhone' && !formInputs.licensePlate && !input.value.trim()) {
-                        showError(field, `Este campo é obrigatório`);
-                    }
-                });
-                input.addEventListener('input', () => {
-                    formInputs[field] = input.value;
-                    if (input.value.trim()) {
-                        clearError(field);
-                        input.style.borderColor = 'var(--accent)';
-                    } else {
-                        input.style.borderColor = '';
-                    }
-                    
-                    // Auto-save on input
-                    autoSaveForm();
-                });
-            }
         });
 
         // Update required fields based on license plate
@@ -2443,11 +2588,11 @@
                     
                     // Restore inputs
                     document.getElementById('licensePlate').value = formInputs.licensePlate;
-                    document.getElementById('brand').value = formInputs.brand;
-                    document.getElementById('model').value = formInputs.model;
-                    document.getElementById('displacement').value = formInputs.displacement;
-                    document.getElementById('clientName').value = formInputs.clientName;
-                    document.getElementById('clientPhone').value = formInputs.clientPhone;
+                    document.getElementById('brand').value = formInputs.brand ? formInputs.brand.toUpperCase() : '';
+                    document.getElementById('model').value = formInputs.model ? formInputs.model.toUpperCase() : '';
+                    document.getElementById('displacement').value = formInputs.displacement ? formInputs.displacement.toUpperCase() : '';
+                    document.getElementById('clientName').value = formInputs.clientName ? formInputs.clientName.toUpperCase() : '';
+                    document.getElementById('clientPhone').value = formInputs.clientPhone || '';
                     
                     if (formInputs.yearManufacture) {
                         document.getElementById('yearManufacture').value = formInputs.yearManufacture;
@@ -2457,10 +2602,10 @@
                     }
                     
                     // Restore turbo
-                    if (formInputs.turbo === 'Sim') {
+                    if (formInputs.turbo === 'SIM') {
                         document.getElementById('turbo-yes').checked = true;
                         document.getElementById('turbo-yes').closest('.checkbox-option').classList.add('checked');
-                    } else if (formInputs.turbo === 'Não') {
+                    } else if (formInputs.turbo === 'NÃO') {
                         document.getElementById('turbo-no').checked = true;
                         document.getElementById('turbo-no').closest('.checkbox-option').classList.add('checked');
                     }
